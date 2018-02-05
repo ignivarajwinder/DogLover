@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">DogLover</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="lets_do_this">Let\'s Do This!</string>
+    <string name="already_a_member">Already a member?</string>
+    <string name="login">Log in an account</string>
+    <string name="train_without_fera_or_pain">Train Without Fear or Pain</string>
+    <string name="title_activity_login_sign_up">LoginSignUp</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="lets_let_the_dogs_out">Let\'s let the Dogs Out!</string>
+    <string name="the_clicker_collar">The Clicker Collar</string>
+    <string name="resend_verification_link">Resend Verification Link</string>
+    <string name="no_internet_title">Internet</string>
+    <string name="no_internet">No Internet Connection</string>
+    <string name="err_msg_password_not_valid" translatable="false">Password should be more than 6 characters</string>
+    <string name="err_msg_password" translatable="false">Enter password</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="simple_create_account_page_text">simple create account page</string>
+    <string name="prompt_name">Name</string>
+    <string name="human_day_training_that_is_bot">human day training that is not</string>
+    <string name="begin_your">Begin your</string>
+    <string name="to_a_well_educated_dog">to a well educated dog</string>
+    <string name="paw_this_button">paw this button</string>
+    <string name="server_error">Server Error!</string>
+    <string name="signUp">Sign Up</string>
+    <string name="loginTitle">Login</string>
+
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/button_red_dark"
+    tools:targetApi="lollipop">
+    <item android:id="@android:id/mask">
+        <shape >
+            <solid android:color="@color/button_red_dark" />
+            <corners android:radius="100dp" />
+        </shape>
+
+    </item>
+    <item
+        android:id="@android:id/background"
+        >
+        <shape>
+            <solid android:color="@color/button_red"/>
+            <corners android:radius="100dp" />
+            <stroke android:width="5px" android:color="@color/button_red"/>
+        </shape>
+    </item>
+</ripple>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<ripple xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:color="?attr/colorControlHighlight">-->
+    <!--<item android:drawable="@drawable/button_with_round_corners"/>-->
+    <!--</ripple>-->
