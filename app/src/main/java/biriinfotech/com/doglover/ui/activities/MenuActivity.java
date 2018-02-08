@@ -111,6 +111,6 @@ public class MenuActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         setIntent(TutorialActivity.class).startActivity();
-        super.onBackPressed();
+//        super.onBackPressed();
     }
 }

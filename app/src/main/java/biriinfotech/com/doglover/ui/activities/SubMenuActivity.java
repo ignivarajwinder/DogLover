@@ -1,8 +1,6 @@
 package biriinfotech.com.doglover.ui.activities;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,23 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 
 import biriinfotech.com.doglover.R;
 import biriinfotech.com.doglover.RetrofitClient;
 import biriinfotech.com.doglover.controller.ApiInterface;
-import biriinfotech.com.doglover.controller.Config;
 import biriinfotech.com.doglover.model.MenuModel;
 import biriinfotech.com.doglover.model.ResponsePojo;
-import biriinfotech.com.doglover.ui.adapters.MenuAdapter;
+import biriinfotech.com.doglover.ui.adapters.SubMenuAdapter;
 import biriinfotech.com.doglover.ui.customviews.CallProgressWheel;
 import biriinfotech.com.doglover.ui.customviews.EllipsizingTextView;
 import biriinfotech.com.doglover.utils.Constants;
@@ -41,10 +29,6 @@ public class SubMenuActivity extends BaseActivity {
     private AppBarLayout mAppBarLayout;
     private Toolbar mToolbar;
     private RecyclerView mRvMain;
-    private ImageView mIvMenuImage;
-    private TextView mTvMenuItemTitle;
-    private TextView mTvMenuItemDescription;
-    private ProgressBar mHomeProgress;
 MenuModel mMenuModel;
     @Override
     AppCompatActivity setInstance() {
@@ -107,38 +91,38 @@ MenuModel mMenuModel;
     void setUpLayout() {
         mRvMain = (RecyclerView) findViewById(R.id.rv_main);
         mRvMain.setLayoutManager(new LinearLayoutManager(this));
-        mIvMenuImage=(ImageView) findViewById(R.id.iv_menu_image);
-        mTvMenuItemTitle=(TextView) findViewById(R.id.menu_item_title);
-        mTvMenuItemDescription=(TextView) findViewById(R.id.tv_menu_item_description);
-        mHomeProgress=(ProgressBar) findViewById(R.id.homeprogress);
+//        mIvMenuImage=(ImageView) findViewById(R.id.iv_menu_image);
+//        mTvMenuItemTitle=(TextView) findViewById(R.id.menu_item_title);
+//        mTvMenuItemDescription=(TextView) findViewById(R.id.tv_menu_item_description);
+//        mHomeProgress=(ProgressBar) findViewById(R.id.homeprogress);
 
 
     }
 
     @Override
     void setDataInViewObjects() {
-        mTvMenuItemTitle.setText(mMenuModel.getTitle());
-        mTvMenuItemDescription.setText(mMenuModel.getDescription().toString().trim());
-
-        Glide.with(this)
-                .load(Config.getBaseURL()+"/"+mMenuModel.getImage())
-//                .placeholder(R.drawable.loading_spinner)
+//        mTvMenuItemTitle.setText(mMenuModel.getTitle());
+//        mTvMenuItemDescription.setText(mMenuModel.getDescription().toString().trim());
+//
+//        Glide.with(this)
+//                .load(Config.getBaseURL()+"/"+mMenuModel.getImage())
+////                .placeholder(R.drawable.loading_spinner)
+////                .into(mIvMenuImage);
+//                .listener(new RequestListener<Drawable>() {
+//
+//
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        mHomeProgress.setVisibility(View.GONE);
+//                        return false;
+//                    }
+//                })
 //                .into(mIvMenuImage);
-                .listener(new RequestListener<Drawable>() {
-
-
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        mHomeProgress.setVisibility(View.GONE);
-                        return false;
-                    }
-                })
-                .into(mIvMenuImage);
         getSubMenuData(mMenuModel.getCategory_id());
     }
 
@@ -156,7 +140,7 @@ MenuModel mMenuModel;
 
                     try {
                         if (commonResponse.isSuccess()) {
-                            mRvMain.setAdapter(new MenuAdapter(SubMenuActivity.this,commonResponse.getData(),mMenuModel.getPosition()));
+                            mRvMain.setAdapter(new SubMenuAdapter(SubMenuActivity.this,mMenuModel,commonResponse.getData(),mMenuModel.getPosition()));
                         } else {
                             Utility.showToastMessageShort(SubMenuActivity.this, commonResponse.getMsg().toString());
                         }
