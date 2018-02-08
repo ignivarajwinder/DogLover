@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import biriinfotech.com.doglover.R;
+import biriinfotech.com.doglover.model.MenuModel;
+import biriinfotech.com.doglover.ui.customviews.EllipsizingTextView;
 import biriinfotech.com.doglover.utils.Utility;
 
 /**
@@ -92,8 +94,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         return this;
     }
 
+    public BaseActivity putExtra(String key, MenuModel value) {
+        try {
+            if (intent != null) {
+                intent.putExtra(key, value);
+            }
+        } catch (Exception e) {
+            Utility.showException(BaseActivity.this, e);
+        }
+        return this;
+    }
+
     @Override
     public void onBackPressed() {
+        EllipsizingTextView.maxLines=2;
         super.onBackPressed();
         overridePendingTransition(R.anim.enter_translate, R.anim.exit_translate);
     }

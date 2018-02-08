@@ -285,7 +285,7 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                         try {
                             if (commonResponse.isSuccess()) {
                                 Utility.showToastMessageShort(LoginSignUpActivity.this, commonResponse.getMsg().toString());
-                                setIntent(MenuActivity.class).setFlag(Intent.FLAG_ACTIVITY_CLEAR_TOP).startActivity();
+                                setIntent(TutorialActivity.class).setFlag(Intent.FLAG_ACTIVITY_CLEAR_TOP).startActivity();
                                 finish();
                             } else {
                                 Utility.showToastMessageShort(LoginSignUpActivity.this, commonResponse.getMsg().toString());

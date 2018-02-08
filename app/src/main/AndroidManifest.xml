@@ -15,28 +15,31 @@
         <activity
             android:name=".ui.activities.MenuActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <activity
             android:name=".ui.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTranslucent"
             android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-        <activity
-            android:name=".ui.activities.LoginSignUpActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
-        <activity
-            android:name=".ui.activities.TutorialActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/AppTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.LoginSignUpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activities.TutorialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTranslucent"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".ui.activities.SubMenuActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

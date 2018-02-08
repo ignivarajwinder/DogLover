@@ -1,5 +1,7 @@
 package biriinfotech.com.doglover.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Biri Infotech on 2/4/2018.
  */
@@ -11,6 +13,7 @@ public class ResponsePojo {
     private  String password;
     private  String approval;
     private  String msg;
+    private ArrayList<MenuModel> data;
 
     public boolean isSuccess() {
         return success;
@@ -50,5 +53,13 @@ public class ResponsePojo {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public ArrayList<MenuModel> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<MenuModel> data) {
+        this.data = data;
     }
 }

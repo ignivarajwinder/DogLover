@@ -102,7 +102,7 @@ public class TutorialActivity extends BaseActivity {
 
     private void launchHomeScreen() {
         try {
-            setIntent(SplashActivity.class).startActivity();
+            setIntent(MenuActivity.class).startActivity();
             finish();
         } catch (Exception e) {
             Utility.showException(TutorialActivity.this,e);

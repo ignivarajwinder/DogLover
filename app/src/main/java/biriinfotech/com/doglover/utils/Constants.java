@@ -10,6 +10,9 @@ public  class Constants {
 
     public static final String LOGIN = "LOGIN";
     public static final String SIGNUP ="SIGNUP" ;
+    public static final java.lang.String MENU_ID = "MENU_ID";
+    public static final java.lang.String MENU_TITLE = "MENU_TITLE";
+    public static final java.lang.String POJO = "POJO";
 
 
     public  static String ACTIVITY_NAME="ACTIVITY_NAME";
