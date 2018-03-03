@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -23,6 +24,7 @@ import biriinfotech.com.doglover.controller.ApiInterface;
 import biriinfotech.com.doglover.model.ResponsePojo;
 import biriinfotech.com.doglover.ui.customviews.CallProgressWheel;
 import biriinfotech.com.doglover.utils.Constants;
+import biriinfotech.com.doglover.utils.PreferenceHandler;
 import biriinfotech.com.doglover.utils.Utility;
 import biriinfotech.com.doglover.utils.Validation;
 import retrofit.Callback;
@@ -39,6 +41,7 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
     String intentActivity;
     Toolbar mToolbar;
     private String LOG_TAG = "LoginSignUpActivity";
+    private TextView mTvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,7 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
         mEtEmail = (AppCompatEditText) findViewById(R.id.email);
         mEtPassword = (AppCompatEditText) findViewById(R.id.password);
         mTvLoginText = (AppCompatTextView) findViewById(R.id.tv_login_text);
+        mTvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
 
         Utility.onChangeClearButtonVisible(LoginSignUpActivity.this, mEtName, mTilName);
         Utility.onChangeClearButtonVisible(LoginSignUpActivity.this, mEtEmail, mTilEmail);
@@ -95,6 +99,7 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
         mTvLoginText.setText(intentActivity.equals(Constants.LOGIN) ? getResources().getString(R.string.login) : getResources().getString(R.string.create_an_account));
         mTvCreateAccountPageText.setVisibility(intentActivity.equals(Constants.LOGIN) ? View.GONE : View.VISIBLE);
         mEtName.setVisibility(intentActivity.equals(Constants.LOGIN) ? View.GONE : View.VISIBLE);
+        mTvForgotPassword.setVisibility(intentActivity.equals(Constants.LOGIN) ? View.VISIBLE : View.GONE);
         mTilName.setVisibility(intentActivity.equals(Constants.LOGIN) ? View.GONE : View.VISIBLE);
         mEtPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -104,6 +109,16 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                     return true;
                 }
                 return false;
+            }
+        });
+
+        mEtEmail.setText(intentActivity.equals(Constants.LOGIN)?PreferenceHandler.readString(LoginSignUpActivity.this,Constants.EMAIL,""):"");
+        mEtPassword.setText(intentActivity.equals(Constants.LOGIN)?PreferenceHandler.readString(LoginSignUpActivity.this,Constants.PASSWORD,""):"");
+
+        mTvForgotPassword.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginSignUpActivity.this, ForgotPasswordActivity.class));
             }
         });
 
@@ -136,12 +151,26 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
         try {
             switch (tag) {
                 case Constants.LOGIN:
-                    if (!(Validation.isValidSignIn(LoginSignUpActivity.this, mEtEmail, mTilEmail, mEtPassword, mTilPassword)==null))
-                        login();
+                    if (Utility.isInternetConnection(this)) {
+                        if (!(Validation.isValidSignIn(LoginSignUpActivity.this, mEtEmail, mTilEmail, mEtPassword, mTilPassword) == null))
+                            login();
+                    }
+                    else
+                    {
+                        Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case Constants.SIGNUP:
-                    if (!(Validation.isValidSignUp(LoginSignUpActivity.this, mEtName, mTilName, mEtEmail, mTilEmail, mEtPassword, mTilPassword)==null))
-                        signUp();
+
+                    if (Utility.isInternetConnection(this)) {
+                        if (!(Validation.isValidSignUp(LoginSignUpActivity.this, mEtName, mTilName, mEtEmail, mTilEmail, mEtPassword, mTilPassword)==null))
+                            signUp();
+                    }
+                    else
+                    {
+                        Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                    }
+
                     break;
             }
         } catch (Exception e) {
@@ -154,6 +183,7 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
     private void setloginScreen() {
         try {
             mEtName.setText("");
+            mTvForgotPassword.setVisibility(View.VISIBLE);
             mEtName.setVisibility(View.GONE);
             mTilName.setVisibility(View.GONE);
             mTvCreateAccountPageText.setVisibility(View.GONE);
@@ -284,6 +314,9 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
 
                         try {
                             if (commonResponse.isSuccess()) {
+                                PreferenceHandler.writeString(LoginSignUpActivity.this,Constants.EMAIL,mEtEmail.getText().toString().trim());
+                                PreferenceHandler.writeString(LoginSignUpActivity.this,Constants.PASSWORD,mEtPassword.getText().toString().trim());
+
                                 Utility.showToastMessageShort(LoginSignUpActivity.this, commonResponse.getMsg().toString());
                                 setIntent(TutorialActivity.class).setFlag(Intent.FLAG_ACTIVITY_CLEAR_TOP).startActivity();
                                 finish();

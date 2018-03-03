@@ -13,6 +13,7 @@ public  class Constants {
     public static final java.lang.String MENU_ID = "MENU_ID";
     public static final java.lang.String MENU_TITLE = "MENU_TITLE";
     public static final java.lang.String POJO = "POJO";
+    public static final String WEB_VIEW_URL = "WEB_VIEW_URL";
 
 
     public  static String ACTIVITY_NAME="ACTIVITY_NAME";

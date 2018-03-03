@@ -44,9 +44,9 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (position == TYPE_HEADER)
-            onItemClickListenerHeader(itemViewHeader, position);
+            onItemClickListenerHeader(holder.itemView, position);
         else
-            onItemClickListener(itemViewItem, position);
+            onItemClickListener(holder.itemView, position);
     }
 
     @Override

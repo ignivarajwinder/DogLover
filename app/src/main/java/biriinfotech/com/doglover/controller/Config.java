@@ -19,7 +19,7 @@ public class Config {
 
         switch (appMode) {
             case DEV:
-                BASE_URL = "http://cloudwebsolutions.in/anotherapi/project/webservices/";
+                BASE_URL = "http://cloudwebsolutions.in/project/webservices/";
                 break;
 
             case TEST:
@@ -27,7 +27,7 @@ public class Config {
                 break;
 
             case LIVE:
-                BASE_URL = "http://cloudwebsolutions.in/anotherapi/project/webservices";
+                BASE_URL = "http://jrmfoods.co.in/anotherapi/project/webservices/";
                 break;
         }
     }

@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/dancing_dog">
 
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/toolbar"-->
@@ -10,19 +11,18 @@
         <!--android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>-->
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-       >
+       android:background="@color/white_transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white_transparent">
 
             <LinearLayout
                 android:id="@+id/main"
@@ -43,14 +43,15 @@
                     <ImageView
                         android:layout_width="@dimen/dimens_20dp"
                         android:layout_height="@dimen/dimens_20dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@drawable/paws" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/the_clicker_collar"
-                        android:textColor="@color/green"
+                        android:textSize="20sp"
+                        android:textColor="@color/pink"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -184,6 +185,20 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginTop="@dimen/dimens_10dp">
+                        <TextView
+                            android:id="@+id/tv_forgot_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Forgot Password?"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
                         android:id="@+id/ll_resend_verification_link"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,5 +223,5 @@
             </LinearLayout>
 
         </RelativeLayout>
-    </ScrollView>
+    </LinearLayout>
 </RelativeLayout>

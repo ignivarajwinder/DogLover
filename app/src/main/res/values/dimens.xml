@@ -12,4 +12,6 @@
     <dimen name="dimens_40dp">40dp</dimen>
     <dimen name="dimens_2p5dp">2.5dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="textSizeItemTitle">16sp</dimen>
+    <dimen name="textSizeItemDescrip">14sp</dimen>
 </resources>

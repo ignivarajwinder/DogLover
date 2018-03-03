@@ -11,5 +11,6 @@ public interface CallBack<T> {
 
     abstract void onSuccess(Call<T> call, Response<T> response);
     abstract void onFailure(Call<T> call, Throwable t);
+    abstract void onInternetUnavailable();
 
 }

@@ -20,7 +20,6 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 
 import biriinfotech.com.doglover.R;
-import biriinfotech.com.doglover.controller.Config;
 import biriinfotech.com.doglover.model.MenuModel;
 import biriinfotech.com.doglover.ui.activities.BaseActivity;
 import biriinfotech.com.doglover.ui.activities.MenuActivity;
@@ -60,19 +59,25 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public void onItemClickListener(View itemView, final int position) {
+        try
+        {
+        final LinearLayout mLlTitleDesc = (LinearLayout) itemView.findViewById(R.id.ll_ttile_desc);
         final LinearLayout mLlMain = (LinearLayout) itemView.findViewById(R.id.ll_main);
         ImageView mIvMenuImage = (ImageView) itemView.findViewById(R.id.iv_menu_image);
         TextView mTvMenuItemTitle = (TextView) itemView.findViewById(R.id.menu_item_title);
         final TextView mTvMenuItemDescription = (TextView) itemView.findViewById(R.id.tv_menu_item_description);
         final ProgressBar mHomeProgress = (ProgressBar) itemView.findViewById(R.id.homeprogress);
-if (this.position==-1)
-        mTvMenuItemTitle.setText((position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
-else
-    mTvMenuItemTitle.setText(this.position+"."+(position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
-mTvMenuItemDescription.setText(arrayListData.get(position).getDescription().toString().trim());
+//if (this.position==-1)
+//        mTvMenuItemTitle.setText((position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
+//else
+//    mTvMenuItemTitle.setText(this.position+"."+(position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
 
+        mTvMenuItemTitle.setText(arrayListData.get(position).getTitle().toString().trim());
+
+        mTvMenuItemDescription.setText(arrayListData.get(position).getDescription().toString().trim());
+mTvMenuItemDescription.setVisibility(arrayListData.get(position).getDescription().toString().equals("")?View.GONE:View.VISIBLE);
         Glide.with(context)
-                .load(Config.getBaseURL() + "/" + arrayListData.get(position).getImage())
+                .load("http://www.jrmfoods.co.in/" + arrayListData.get(position).getImage())
 //                .placeholder(R.drawable.loading_spinner)
 //                .into(mIvMenuImage);
                 .listener(new RequestListener<Drawable>() {
@@ -95,7 +100,8 @@ mTvMenuItemDescription.setText(arrayListData.get(position).getDescription().toSt
             public void onClick(View view) {
                 if ((view.getContext() instanceof MenuActivity)) {
                     MenuModel menuModel = arrayListData.get(position);
-                    menuModel.setTitle((position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
+//                    menuModel.setTitle((position + 1) + ". " + arrayListData.get(position).getTitle().toString().trim());
+                    menuModel.setTitle(arrayListData.get(position).getTitle().toString().trim());
                     menuModel.setPosition(position+1);
                     ((BaseActivity) mLlMain.getContext())
                             .setIntent(SubMenuActivity.class)
@@ -107,5 +113,10 @@ mTvMenuItemDescription.setText(arrayListData.get(position).getDescription().toSt
                 }
             }
         });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

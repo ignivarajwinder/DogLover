@@ -39,5 +39,7 @@
     <string name="server_error">Server Error!</string>
     <string name="signUp">Sign Up</string>
     <string name="loginTitle">Login</string>
+    <string name="submit">Submit</string>
+    <string name="check_internet">Please check your internet connection</string>
 
 </resources>

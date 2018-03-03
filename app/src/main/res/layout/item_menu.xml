@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_main"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_marginBottom="@dimen/dimens_2p5dp"
-    android:layout_marginLeft="@dimen/dimens_5dp"
-    android:layout_marginRight="@dimen/dimens_5dp"
-    android:layout_marginTop="@dimen/dimens_2p5dp"
     android:orientation="vertical"
+    android:layout_marginLeft="@dimen/dimens_10dp"
+    android:layout_marginRight="@dimen/dimens_10dp"
+    android:background="@color/white_transparent"
     app:cardCornerRadius="@dimen/dimens_5dp">
+
+    <!--android:layout_marginBottom="@dimen/dimens_2p5dp"-->
+    <!--android:layout_marginLeft="@dimen/dimens_5dp"-->
+    <!--android:layout_marginRight="@dimen/dimens_5dp"-->
+    <!--android:layout_marginTop="@dimen/dimens_2p5dp"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white_transparent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:gravity="center"
             android:background="?attr/selectableItemBackground">
 
             <RelativeLayout
@@ -27,21 +33,26 @@
 
                 <ImageView
                     android:id="@+id/iv_menu_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp" />
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true" />
 
                 <ProgressBar
                     android:id="@+id/homeprogress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_ttile_desc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dimens_10dp"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/white_transparent"
                 android:orientation="vertical">
 
                 <TextView
@@ -50,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_10dp"
                     android:text="men item"
+                    android:textSize="@dimen/textSizeItemTitle"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -59,6 +71,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimens_10dp"
                     android:inputType="textMultiLine"
+                    android:textSize="@dimen/textSizeItemDescrip"
+                    android:layout_weight="1"
                     android:ellipsize="marquee"
                     android:singleLine="false"
                     android:maxLines="2"
@@ -74,4 +88,4 @@
             android:orientation="vertical" />
 
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+</LinearLayout>

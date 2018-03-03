@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import biriinfotech.com.doglover.interfaces.CallBack;
 import biriinfotech.com.doglover.model.ResponsePojo;
+import retrofit2.Call;
 
 /**
  * Created by Biri Infotech on 2/4/2018.
@@ -21,7 +22,7 @@ public class ApiExecutor {
     public static String password = "password";
     private String TAG = "params";
     Context context;
-    HashMap<String, Object> params;
+    HashMap<String, String> params;
 
     public static ApiExecutor getInstance() {
         return apiExecutor;
@@ -35,7 +36,7 @@ public class ApiExecutor {
     private ApiExecutor() {
     }
 
-    public ApiExecutor setParams(HashMap<String, Object> params) {
+    public ApiExecutor setParams(HashMap<String, String> params) {
         apiExecutor.params = params;
         Log.d(TAG, params.toString());
         return apiExecutor;
@@ -55,4 +56,27 @@ public class ApiExecutor {
                         .signUp(params.get(ApiExecutor.name).toString().trim(), params.get(ApiExecutor.email_address).toString().trim(), params.get(ApiExecutor.password).toString().trim()), callBack);
 
     }
+
+    public Call getMenuData(CallBack<ResponsePojo> callBack) {
+        Call call = RetrofitClient.getClient()
+                .create(ApiInterface.class)
+                .getMenuData();
+        RetrofitClient.getInstance(context)
+                .execute(call, callBack);
+        return call;
+    }
+
+    public Call getSubMenuData(CallBack<ResponsePojo> callBack) {
+
+        Call call = RetrofitClient.getClient()
+                .create(ApiInterface.class)
+                .getSubMenuData(params.get("main_menu_id").toString());
+
+        RetrofitClient.getInstance(context)
+                .execute(call, callBack);
+
+        return call;
+
+    }
+
 }

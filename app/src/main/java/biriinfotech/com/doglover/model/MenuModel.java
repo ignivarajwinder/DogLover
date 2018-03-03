@@ -21,7 +21,34 @@ public class MenuModel implements Serializable {
     private  String description;
     private  String image;
     private  String category_id;
+    private  String video_url;
+    private  String pdf_link;
+    private  String web_view_url;
     private int position;
+
+    public String getWeb_view_url() {
+        return web_view_url;
+    }
+
+    public void setWeb_view_url(String web_view_url) {
+        this.web_view_url = web_view_url;
+    }
+
+    public String getPdf_link() {
+        return pdf_link;
+    }
+
+    public void setPdf_link(String pdf_link) {
+        this.pdf_link = pdf_link;
+    }
+
+    public String getVideo_url() {
+        return video_url;
+    }
+
+    public void setVideo_url(String video_url) {
+        this.video_url = video_url;
+    }
 
     public int getPosition() {
         return position;

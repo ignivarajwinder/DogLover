@@ -13,4 +13,6 @@
     <color name="button_red_dark">#830303</color>
     <color name="grey">#696969</color>
     <color name="green">#2ff21a</color>
+    <color name="white_transparent">#59ffffff</color>
+    <color name="pink">#ff69d7</color>
 </resources>
