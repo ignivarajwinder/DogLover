@@ -6,7 +6,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,12 +33,10 @@ import retrofit.RetrofitError;
 
 public class LoginSignUpActivity extends BaseActivity implements OnClickListener {
 
-
     private AppCompatEditText mEtEmail, mEtPassword, mEtName;
     private AppCompatTextView mTvLoginText, mTvCreateAccountPageText, mEmailSignInButton;
     private TextInputLayout mTilName, mTilEmail, mTilPassword;
     String intentActivity;
-    Toolbar mToolbar;
     private String LOG_TAG = "LoginSignUpActivity";
     private TextView mTvForgotPassword;
 
@@ -61,18 +58,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
     @Override
     void setUpToolbar() {
         intentActivity = getIntent().getStringExtra(Constants.ACTIVITY_NAME) == null ? "" : getIntent().getStringExtra(Constants.ACTIVITY_NAME);
-//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(mToolbar);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-////        getSupportActionBar().setTitle(intentActivity.equals(Constants.LOGIN) ? getResources().getString(R.string.loginTitle) : getResources().getString(R.string.signUp));
-//        getSupportActionBar().setTitle("");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        mToolbar.setNavigationOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onBackPressed();
-//            }
-//        });
     }
 
     @Override
@@ -85,14 +70,11 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
         mEtPassword = (AppCompatEditText) findViewById(R.id.password);
         mTvLoginText = (AppCompatTextView) findViewById(R.id.tv_login_text);
         mTvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
-
         Utility.onChangeClearButtonVisible(LoginSignUpActivity.this, mEtName, mTilName);
         Utility.onChangeClearButtonVisible(LoginSignUpActivity.this, mEtEmail, mTilEmail);
         Utility.onChangeClearButtonVisible(LoginSignUpActivity.this, mEtPassword, mTilPassword);
-
-
         mTvCreateAccountPageText = (AppCompatTextView) findViewById(R.id.tv_create_account_page_text);
-       Utility.setTypeface(LoginSignUpActivity.this,mTvCreateAccountPageText,null,false);
+        Utility.setTypeface(LoginSignUpActivity.this, mTvCreateAccountPageText, null, false);
         mEmailSignInButton = (AppCompatTextView) findViewById(R.id.tv_lets_do_this);
         mEmailSignInButton.setOnClickListener(this);
         mEmailSignInButton.setTag(intentActivity == null ? "" : intentActivity);
@@ -112,8 +94,8 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
             }
         });
 
-        mEtEmail.setText(intentActivity.equals(Constants.LOGIN)?PreferenceHandler.readString(LoginSignUpActivity.this,Constants.EMAIL,""):"");
-        mEtPassword.setText(intentActivity.equals(Constants.LOGIN)?PreferenceHandler.readString(LoginSignUpActivity.this,Constants.PASSWORD,""):"");
+        mEtEmail.setText(intentActivity.equals(Constants.LOGIN) ? PreferenceHandler.readString(LoginSignUpActivity.this, Constants.EMAIL, "") : "");
+        mEtPassword.setText(intentActivity.equals(Constants.LOGIN) ? PreferenceHandler.readString(LoginSignUpActivity.this, Constants.PASSWORD, "") : "");
 
         mTvForgotPassword.setOnClickListener(new OnClickListener() {
             @Override
@@ -121,16 +103,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                 startActivity(new Intent(LoginSignUpActivity.this, ForgotPasswordActivity.class));
             }
         });
-
-//         <com.promocodeclub.AutoScrollViewPager
-//        android:id="@+id/pager"
-//        android:layout_width="match_parent"
-//        android:layout_height="match_parent"
-//        android:background="@color/white"
-//
-//                />
-
-
     }
 
     @Override
@@ -154,20 +126,16 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                     if (Utility.isInternetConnection(this)) {
                         if (!(Validation.isValidSignIn(LoginSignUpActivity.this, mEtEmail, mTilEmail, mEtPassword, mTilPassword) == null))
                             login();
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case Constants.SIGNUP:
 
                     if (Utility.isInternetConnection(this)) {
-                        if (!(Validation.isValidSignUp(LoginSignUpActivity.this, mEtName, mTilName, mEtEmail, mTilEmail, mEtPassword, mTilPassword)==null))
+                        if (!(Validation.isValidSignUp(LoginSignUpActivity.this, mEtName, mTilName, mEtEmail, mTilEmail, mEtPassword, mTilPassword) == null))
                             signUp();
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
                     }
 
@@ -197,35 +165,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
     }
 
     private void signUp() {
-//        try {
-//            HashMap<String, Object> params = new HashMap<>();
-//            params.put(ApiExecutor.name, mEtName.getText().toString().trim());
-//            params.put(ApiExecutor.email_address, mEtEmail.getText().toString().trim());
-//            params.put(ApiExecutor.password, mEtPassword.getText().toString().trim());
-//            ApiExecutor.getInstance().setParams(params).signUp(new CallBack<ResponsePojo>() {
-//                @Override
-//                public void onSuccess(Call<ResponsePojo> call, Response<ResponsePojo> response) {
-//                    ResponsePojo responsePojo=response.body();
-//                    if (responsePojo.isSuccess()) {
-//                        Toast.makeText(LoginSignUpActivity.this, "Login Successful with " + response.body().getEmail_address(), Toast.LENGTH_SHORT).show();
-//                        setloginScreen();
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(LoginSignUpActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponsePojo> call, Throwable t) {
-//                    Toast.makeText(LoginSignUpActivity.this, "Login UnSuccesful", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } catch (Exception e) {
-//            Utility.showException(LoginSignUpActivity.this, e);
-//        }
-
-
         try {
             ApiInterface mWebApi = RetrofitClient.createService(ApiInterface.class, this);
             CallProgressWheel.showLoadingDialog(this, "Loading...");
@@ -258,7 +197,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                 @Override
                 public void failure(RetrofitError error) {
                     try {
-//                            Utility.showToastMessageShort(LoginSignUpActivity.this, getResources().getString(R.string.server_error));
                         Utility.showToastMessageShort(LoginSignUpActivity.this, error.getMessage().toString());
 
                     } catch (Exception e) {
@@ -275,47 +213,21 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
 
     private void login() {
         try {
-//            HashMap<String, Object> params = new HashMap<>();
-//            params.put(ApiExecutor.email_address, mEtEmail.getText().toString().trim());
-//            params.put(ApiExecutor.password, mEtPassword.getText().toString().trim());
-//            ApiExecutor.getInstance().setParams(params).login(new CallBack<ResponsePojo>() {
-//                @Override
-//                public void onSuccess(Call<ResponsePojo> call, Response<ResponsePojo> response) {
-//                    ResponsePojo responsePojo=response.body();
-//                    if (responsePojo.isSuccess()) {
-//                        Toast.makeText(LoginSignUpActivity.this, "Login Successful with " + response.body().getEmail_address(), Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(LoginSignUpActivity.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-//                    }
-//                    }
-//
-//                @Override
-//                public void onFailure(Call<ResponsePojo> call, Throwable t) {
-//                    Toast.makeText(LoginSignUpActivity.this, "Login UnSuccesful", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-
             try {
                 ApiInterface mWebApi = RetrofitClient.createService(ApiInterface.class, this);
                 CallProgressWheel.showLoadingDialog(this, "Loading...");
                 HashMap<String, String> params = new HashMap<>();
                 params.put(ApiExecutor.email_address, mEtEmail.getText().toString().trim());
                 params.put(ApiExecutor.password, mEtPassword.getText().toString().trim());
-
                 Log.d("Parameters----", "" + params.toString());
-
                 mWebApi.login(params.get(ApiExecutor.email_address).toString().trim(), params.get(ApiExecutor.password).toString().trim(), new Callback<ResponsePojo>() {
                     @Override
                     public void success(ResponsePojo commonResponse, retrofit.client.Response response) {
-
                         Log.d(LOG_TAG, "Success " + commonResponse.toString());
-
                         try {
                             if (commonResponse.isSuccess()) {
-                                PreferenceHandler.writeString(LoginSignUpActivity.this,Constants.EMAIL,mEtEmail.getText().toString().trim());
-                                PreferenceHandler.writeString(LoginSignUpActivity.this,Constants.PASSWORD,mEtPassword.getText().toString().trim());
+                                PreferenceHandler.writeString(LoginSignUpActivity.this, Constants.EMAIL, mEtEmail.getText().toString().trim());
+                                PreferenceHandler.writeString(LoginSignUpActivity.this, Constants.PASSWORD, mEtPassword.getText().toString().trim());
 
                                 Utility.showToastMessageShort(LoginSignUpActivity.this, commonResponse.getMsg().toString());
                                 setIntent(TutorialActivity.class).setFlag(Intent.FLAG_ACTIVITY_CLEAR_TOP).startActivity();
@@ -332,7 +244,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
                     @Override
                     public void failure(RetrofitError error) {
                         try {
-//                            Utility.showToastMessageShort(LoginSignUpActivity.this, getResources().getString(R.string.server_error));
                             Utility.showToastMessageShort(LoginSignUpActivity.this, error.getMessage().toString());
 
                         } catch (Exception e) {
@@ -347,29 +258,6 @@ public class LoginSignUpActivity extends BaseActivity implements OnClickListener
         } catch (Exception e) {
             Utility.showException(LoginSignUpActivity.this, e);
         }
-
-
-//        ApiInterface apiService =
-//                RetrofitClient.getClient().create(ApiInterface.class);
-//
-//        Call<ResponsePojo> call = apiService.login(mEtEmail.getText().toString(),mEtPassword.getText().toString());
-//        call.enqueue(new Callback<ResponsePojo>() {
-//            @Override
-//            public void onResponse(Call<ResponsePojo> call, Response<ResponsePojo> response) {
-//                int statusCode = response.code();
-//                Toast.makeText(LoginSignUpActivity.this, "Login Succesful " + response.body(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponsePojo> call, Throwable t) {
-//                // Log error here since request failed
-//                Log.e("", t.toString());
-//                Toast.makeText(LoginSignUpActivity.this, "Login UnSuccesful", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-
-
     }
 
     @Override

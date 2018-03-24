@@ -28,11 +28,7 @@ public class TutorialActivity extends BaseActivity {
         public void onPageSelected(int position) {
 
             if (position == layouts.length - 1) {
-//                mTvLetsGo.setText(getString(R.string.letsGo));
-//                mTvLetsGo.setVisibility(View.VISIBLE);
             } else {
-//                mTvLetsGo.setText(getString(R.string.skip));
-//                mTvLetsGo.setVisibility(View.VISIBLE);
             }
         }
 
@@ -60,7 +56,7 @@ public class TutorialActivity extends BaseActivity {
     protected void setUpLayout() {
         try {
             viewPager = (ViewPager) findViewById(R.id.view_pager);
-            mTvPawThisButton=(AppCompatTextView)findViewById(R.id.tv_paw_this_button) ;
+            mTvPawThisButton = (AppCompatTextView) findViewById(R.id.tv_paw_this_button);
             layouts = new int[]{
                     R.layout.tutorial_screen_1,
                     R.layout.tutorial_screen_2,
@@ -87,10 +83,12 @@ public class TutorialActivity extends BaseActivity {
         } catch (Exception e) {
         }
     }
+
     @Override
     AppCompatActivity setInstance() {
         return TutorialActivity.this;
     }
+
     @Override
     protected void setUpToolbar() {
     }
@@ -105,7 +103,7 @@ public class TutorialActivity extends BaseActivity {
             setIntent(MenuActivity.class).startActivity();
             finish();
         } catch (Exception e) {
-            Utility.showException(TutorialActivity.this,e);
+            Utility.showException(TutorialActivity.this, e);
         }
     }
 

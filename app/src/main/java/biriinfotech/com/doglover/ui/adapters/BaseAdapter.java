@@ -38,7 +38,7 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewH
     }
 
     public int setLayoutResourceFileHeader() {
-        return  setLayoutResourceFile();
+        return setLayoutResourceFile();
     }
 
     @Override

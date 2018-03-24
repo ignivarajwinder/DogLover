@@ -1,6 +1,5 @@
 package biriinfotech.com.doglover.ui.activities;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -53,17 +52,21 @@ public class MenuActivity extends BaseActivity {
 
     @Override
     void setUpToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Main Menu");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        try {
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setTitle("Main Menu");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+        } catch (Exception e) {
+            Utility.showException(MenuActivity.this, e);
+        }
     }
 
     @Override
@@ -75,34 +78,26 @@ public class MenuActivity extends BaseActivity {
 
             BitmapDrawable background = new BitmapDrawable(BlurBuilder.blur(this, BitmapFactory.decodeResource(getResources(), R.drawable.dancing_dog)));
             mLlMain.setBackgroundDrawable(background);
-//        Blurry.with(this)
-//                .radius(10)
-//                .sampling(8)
-//                .color(Color.argb(66, 255, 255, 0))
-//                .async()
-//                .animate(500)
-//                .onto(mLlMain);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     void setDataInViewObjects() {
-//        getMenuData();
-        if (Utility.isInternetConnection(this)) {
-            getMenuDataRetrofit2();
-        }
-        else
-        {
-            Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+        try {
+            if (Utility.isInternetConnection(this)) {
+                getMenuDataRetrofit2();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Utility.showException(MenuActivity.this, e);
         }
 
     }
 
-    CallBack CallBack=new CallBack<ResponsePojo>() {
+    CallBack CallBack = new CallBack<ResponsePojo>() {
         @Override
         public void onSuccess(Call<ResponsePojo> call, Response<ResponsePojo> response) {
             ResponsePojo commonResponse = response.body();
@@ -112,7 +107,6 @@ public class MenuActivity extends BaseActivity {
                 mRvMain.setVisibility(View.VISIBLE);
                 hideNoInternetView(MenuActivity.this);
                 if (commonResponse.isSuccess()) {
-//                            Utility.showToastMessageShort(MenuActivity.this, commonResponse.getMsg().toString());
                     mRvMain.setAdapter(new MenuAdapter(MenuActivity.this, commonResponse.getData()));
                 } else {
                     Utility.showToastMessageShort(MenuActivity.this, commonResponse.getMsg().toString());
@@ -130,13 +124,17 @@ public class MenuActivity extends BaseActivity {
 
         @Override
         public void onInternetUnavailable() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mRvMain.setVisibility(View.GONE);
-                    showNoInternetView(MenuActivity.this, callGetMenuDataRetrofit2,CallBack);
-                }
-            });
+            try {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRvMain.setVisibility(View.GONE);
+                        showNoInternetView(MenuActivity.this, callGetMenuDataRetrofit2, CallBack);
+                    }
+                });
+            } catch (Exception e) {
+                Utility.showException(MenuActivity.this, e);
+            }
         }
     };
 
@@ -163,7 +161,6 @@ public class MenuActivity extends BaseActivity {
 
                     try {
                         if (commonResponse.isSuccess()) {
-//                            Utility.showToastMessageShort(MenuActivity.this, commonResponse.getMsg().toString());
                             mRvMain.setAdapter(new MenuAdapter(MenuActivity.this, commonResponse.getData()));
                         } else {
                             Utility.showToastMessageShort(MenuActivity.this, commonResponse.getMsg().toString());
@@ -177,7 +174,6 @@ public class MenuActivity extends BaseActivity {
                 @Override
                 public void failure(RetrofitError error) {
                     try {
-//                            Utility.showToastMessageShort(LoginSignUpActivity.this, getResources().getString(R.string.server_error));
                         Utility.showToastMessageShort(MenuActivity.this, error.getMessage().toString());
 
                     } catch (Exception e) {
@@ -196,10 +192,11 @@ public class MenuActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,TutorialActivity.class));
-        finish();
-        overridePendingTransition(R.anim.enter_translate,R.anim.exit_translate);
-//        super.onBackPressed();
+        try {
+            super.onBackPressed();
+        } catch (Exception e) {
+            Utility.showException(MenuActivity.this, e);
+        }
     }
 
 }

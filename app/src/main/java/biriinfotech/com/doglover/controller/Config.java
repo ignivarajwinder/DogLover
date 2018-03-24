@@ -5,6 +5,7 @@ public class Config {
 
     static String BASE_URL = "";
     static AppMode appMode = AppMode.LIVE;
+
     static public String getBaseURL() {
         init(appMode);
         return BASE_URL;
@@ -27,10 +28,15 @@ public class Config {
                 break;
 
             case LIVE:
-                BASE_URL = "http://jrmfoods.co.in/anotherapi/project/webservices/";
+                BASE_URL = "http://mypawsbestfriend.com/anotherapi/project/webservices/";
                 break;
         }
     }
+
+    public static String getBaseUrlImage() {
+        return "http://mypawsbestfriend.com/";
+    }
+
     public enum AppMode {
         DEV, TEST, LIVE
     }

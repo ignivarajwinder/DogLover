@@ -25,11 +25,11 @@ public class RetrofitClient<T> {
     private static final RetrofitClient retrofitClient = new RetrofitClient();
     private static Retrofit retrofit = null;
     Context context;
-    private String TAG="response";
+    private String TAG = "response";
     private CallBack<T> callBack;
 
     public static RetrofitClient getInstance(Context context) {
-        retrofitClient.context=context;
+        retrofitClient.context = context;
         return retrofitClient;
     }
 
@@ -74,6 +74,7 @@ public class RetrofitClient<T> {
 
         return okhttpClientBuilder.build();
     }
+
     public Cache getCache() {
         File httpCacheDirectory = new File(getCacheDir(), "responses");
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
@@ -82,7 +83,7 @@ public class RetrofitClient<T> {
     }
 
     private String getCacheDir() {
-        final String convertedFile = Environment.getExternalStorageDirectory()+"/cache";
+        final String convertedFile = Environment.getExternalStorageDirectory() + "/cache";
         return convertedFile;
     }
 
@@ -96,12 +97,12 @@ public class RetrofitClient<T> {
 
     public void execute(Call<T> call, final CallBack<T> callBack) {
 
-        retrofitClient.callBack=callBack;
+        retrofitClient.callBack = callBack;
 
         call.enqueue(new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                Log.d(TAG, "onResponse: "+response.body());
+                Log.d(TAG, "onResponse: " + response.body());
                 callBack.onSuccess(call, response);
             }
 

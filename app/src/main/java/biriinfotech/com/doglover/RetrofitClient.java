@@ -21,7 +21,7 @@ public class RetrofitClient {
     private static final int READ_TIMEOUT_MILLIS = 30 * 1000; // 60s
     private static RestAdapter adapter;
     private static OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-    
+
     private static RequestInterceptor newInterceptor(final Context context) {
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
@@ -38,6 +38,7 @@ public class RetrofitClient {
     }
 
     static RestAdapter.Builder builder;
+
     static RestAdapter.Builder getBuilder(Context context) {
         if (builder == null) {
             builder = new RestAdapter.Builder()

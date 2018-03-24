@@ -22,7 +22,7 @@ import retrofit2.Response;
  * Created by Biri Infotech on 2/3/2018.
  */
 
-public abstract class BaseActivity<T> extends AppCompatActivity  implements Callback<T> {
+public abstract class BaseActivity<T> extends AppCompatActivity implements Callback<T> {
     Intent intent;
     boolean isOnStartExecuted;
     private CallBack<T> callBack;
@@ -59,7 +59,6 @@ public abstract class BaseActivity<T> extends AppCompatActivity  implements Call
     public BaseActivity startActivity() {
         try {
             startActivity(intent);
-            overridePendingTransition(R.anim.right_in, R.anim.right_out);
         } catch (Exception e) {
             Utility.showException(BaseActivity.this, e);
         }
@@ -122,33 +121,27 @@ public abstract class BaseActivity<T> extends AppCompatActivity  implements Call
 
     @Override
     public void onResponse(Call call, Response response) {
-        callBack.onSuccess(call,response);
+        callBack.onSuccess(call, response);
     }
 
     @Override
     public void onFailure(Call call, Throwable t) {
-        callBack.onFailure(call,t);
+        callBack.onFailure(call, t);
     }
 
 
-
-
-    public void hideNoInternetView(Context context)
-    {
-        try
-        {
+    public void hideNoInternetView(Context context) {
+        try {
             LinearLayout mLinearLayout = ((Activity) context).findViewById(R.id.no_internet_connection);
             mLinearLayout.setVisibility(View.GONE);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void showNoInternetView(Context context, final Call call,CallBack callBack) {
+    public void showNoInternetView(Context context, final Call call, CallBack callBack) {
         try {
-            this.callBack=callBack;
+            this.callBack = callBack;
             LinearLayout mLinearLayout = ((Activity) context).findViewById(R.id.no_internet_connection);
             mLinearLayout.setVisibility(View.VISIBLE);
             TextView mTvRetry = ((Activity) context).findViewById(R.id.retry);
@@ -180,7 +173,6 @@ public abstract class BaseActivity<T> extends AppCompatActivity  implements Call
     public void onBackPressed() {
         EllipsizingTextView.maxLines = 2;
         super.onBackPressed();
-        overridePendingTransition(R.anim.enter_translate, R.anim.exit_translate);
     }
 
 }

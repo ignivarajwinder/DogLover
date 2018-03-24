@@ -35,7 +35,7 @@ public class ForgotPasswordActivity extends BaseActivity {
     private TextInputLayout mTilEmail;
     private AppCompatEditText mEtEmail;
     private AppCompatTextView mTvSubmit;
-    private String LOG_TAG="ForgotPasswordActivity";
+    private String LOG_TAG = "ForgotPasswordActivity";
     Toolbar toolbar;
     private LinearLayout mLlMain;
 
@@ -55,7 +55,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     @Override
     void setUpToolbar() {
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,7 +94,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
             Log.d("Parameters----", "" + params.toString());
 
-            mWebApi.forgotPassword(params.get(ApiExecutor.email_address).toString().trim(),new Callback<ResponsePojo>() {
+            mWebApi.forgotPassword(params.get(ApiExecutor.email_address).toString().trim(), new Callback<ResponsePojo>() {
                 @Override
                 public void success(ResponsePojo commonResponse, retrofit.client.Response response) {
 
@@ -129,7 +129,7 @@ public class ForgotPasswordActivity extends BaseActivity {
             });
         } catch (Exception e) {
         }
-}
+    }
 
     @Override
     void setDataInViewObjects() {

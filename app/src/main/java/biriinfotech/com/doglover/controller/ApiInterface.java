@@ -12,15 +12,15 @@ public interface ApiInterface {
 
     @Multipart
     @POST(ApiExecutor.LOGIN)
-    void login(@Part("email_address")String email_address, @Part("password")String password, Callback<ResponsePojo> callback);
+    void login(@Part("email_address") String email_address, @Part("password") String password, Callback<ResponsePojo> callback);
 
     @Multipart
     @POST(ApiExecutor.SIGNUP)
-    void signUp(@Part("name")String name, @Part("email_address")String email_address, @Part("password")String password, Callback<ResponsePojo> callback);
+    void signUp(@Part("name") String name, @Part("email_address") String email_address, @Part("password") String password, Callback<ResponsePojo> callback);
 
     @Multipart
     @POST("/lostpassword.php")
-    void forgotPassword(@Part("email_address")String email_address, Callback<ResponsePojo> callback);
+    void forgotPassword(@Part("email_address") String email_address, Callback<ResponsePojo> callback);
 
 
     @Multipart
@@ -40,16 +40,15 @@ public interface ApiInterface {
     @POST("register.php")
     Call<ResponsePojo> signUp(@Part("name") String name, @Part("email_address") String email_address, @Part("password") String password);
 
-//    @retrofit2.http.Multipart
+    //    @retrofit2.http.Multipart
     @retrofit2.http.GET("sub_main_menu.php")
     Call<ResponsePojo> getSubMenuData(@retrofit2.http.Query("main_menu_id") String main_menu_id);
 
     @GET("/main_menu.php")
-    void getMenuData( Callback<ResponsePojo> callback);
+    void getMenuData(Callback<ResponsePojo> callback);
 
     @retrofit2.http.GET("main_menu.php")
     Call<ResponsePojo> getMenuData();
-
 
 
 }

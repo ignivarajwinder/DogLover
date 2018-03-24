@@ -18,7 +18,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 
     private TextView mTvLetsDoThis;
     private String TAG = this.getClass().getName();
-    private LinearLayout mLlLogin,mLlLoginLayout;
+    private LinearLayout mLlLogin, mLlLoginLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +47,17 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         mLlLoginLayout = (LinearLayout) findViewById(R.id.ll_login_layout);
         mTvLetsDoThis.setOnClickListener(this);
         mLlLogin.setOnClickListener(this);
+        if (PreferenceHandler.readString(SplashActivity.this, Constants.EMAIL, "").equals("")) {
 
-        if (PreferenceHandler.readString(SplashActivity.this,Constants.EMAIL,"").equals("")){
-
-        }
-        else
-        {
+        } else {
             mLlLoginLayout.setVisibility(View.GONE);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(SplashActivity.this,TutorialActivity.class));
+                    startActivity(new Intent(SplashActivity.this, TutorialActivity.class));
                     finish();
                 }
-            },1500);
+            }, 1500);
         }
 
     }
@@ -74,11 +71,11 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_lets_do_this:
-                setIntent(LoginSignUpActivity.class).putExtra(Constants.ACTIVITY_NAME,Constants.SIGNUP).startActivity();
+                setIntent(LoginSignUpActivity.class).putExtra(Constants.ACTIVITY_NAME, Constants.SIGNUP).startActivity();
                 finish();
                 break;
             case R.id.ll_login:
-                setIntent(LoginSignUpActivity.class).putExtra(Constants.ACTIVITY_NAME,Constants.LOGIN).startActivity();
+                setIntent(LoginSignUpActivity.class).putExtra(Constants.ACTIVITY_NAME, Constants.LOGIN).startActivity();
                 finish();
                 break;
         }
@@ -87,7 +84,6 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onBackPressed() {
-//        setIntent(TutorialActivity.class).startActivity();
         super.onBackPressed();
     }
 }

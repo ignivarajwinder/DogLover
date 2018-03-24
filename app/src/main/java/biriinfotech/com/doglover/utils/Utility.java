@@ -54,7 +54,7 @@ public class Utility {
         try {
             e.printStackTrace();
             Log.d(context.getClass().getName(), e.toString());
-            Toast.makeText(context, "" + e, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "" + e, Toast.LENGTH_SHORT).show();
         }
         catch (Exception exception)
         {

@@ -23,6 +23,14 @@
             android:gravity="center"
             android:orientation="vertical"
             android:background="@color/white_transparent">
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/paws"
+                android:layout_marginTop="@dimen/dimens_20dp"
+                android:layout_marginLeft="@dimen/dimens_10dp"
+                android:layout_marginRight="@dimen/dimens_15dp"
+                android:foreground="@color/white_transparent"/>
 
             <LinearLayout
                 android:id="@+id/main"
@@ -40,10 +48,6 @@
                     android:paddingLeft="@dimen/dimens_20dp"
                     android:paddingRight="@dimen/dimens_20dp">
 
-                    <ImageView
-                        android:layout_width="@dimen/dimens_20dp"
-                        android:layout_height="@dimen/dimens_20dp"
-                        android:src="@drawable/paws" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 
 import biriinfotech.com.doglover.R;
+import biriinfotech.com.doglover.controller.Config;
 import biriinfotech.com.doglover.model.MenuModel;
 import biriinfotech.com.doglover.ui.activities.BaseActivity;
 import biriinfotech.com.doglover.ui.activities.MenuActivity;
@@ -79,22 +80,13 @@ public class SubMenuAdapter extends BaseAdapter {
             TextView mTvMenuItemTitle = (TextView) itemView.findViewById(R.id.menu_item_title);
             final TextView mTvMenuItemDescription = (TextView) itemView.findViewById(R.id.tv_menu_item_description);
             final ProgressBar mHomeProgress = (ProgressBar) itemView.findViewById(R.id.homeprogress);
-
-//        if (this.position == -1)
-//            mTvMenuItemTitle.setText((position-1+1) + ". " + arrayListData.get(position-1).getTitle().toString().trim());
-//        else
-//            mTvMenuItemTitle.setText(this.position + "." + (position-1 + 1) + ". " + arrayListData.get(position-1).getTitle().toString().trim());
-
             mTvMenuItemTitle.setText(arrayListData.get(position - 1).getTitle() != null ? arrayListData.get(position - 1).getTitle().toString().trim() : "");
-
             mTvMenuItemDescription.setText(arrayListData.get(position - 1).getDescription().toString().trim());
-
             if (!arrayListData.get(position - 1).getPdf_link().equals("")) {
                 mTvWatchVideo.setText(!arrayListData.get(position - 1).getPdf_link().equals("") ? "Download" : "Watch Video");
-            if (arrayListData.get(position - 1).getPdf_link().contains("amazon"))
-            {
-                mTvWatchVideo.setText(" Buy Now ");
-            }
+                if (arrayListData.get(position - 1).getPdf_link().contains("amazon")) {
+                    mTvWatchVideo.setText(" Buy Now ");
+                }
             }
             if (arrayListData.get(position - 1).getPdf_link().equals(""))
                 mLlWatchVideo.setVisibility(arrayListData.get(position - 1).getVideo_url().equals("") ? View.GONE : View.VISIBLE);
@@ -126,57 +118,26 @@ public class SubMenuAdapter extends BaseAdapter {
                 }
             });
 
-
-
-//        Glide.with(context)
-//                .load(Config.getBaseURL() + arrayListData.get(position-1).getImage())
-////                .placeholder(R.drawable.loading_spinner)
-////                .into(mIvMenuImage);
-//                .listener(new RequestListener<Drawable>() {
-//
-//
-//                    @Override
-//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-//                        mHomeProgress.setVisibility(View.GONE);
-//                        return false;
-//                    }
-//                })
-//                .into(mIvMenuImage);
-
-
             mLlMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    try
-                    {
-                    if ((view.getContext() instanceof MenuActivity)) {
-                        MenuModel menuModel = arrayListData.get(position - 1);
-                        menuModel.setTitle((position - 1 + 1) + ". " + arrayListData.get(position - 1).getTitle().toString().trim());
-                        menuModel.setPosition(position - 1 + 1);
-                        ((BaseActivity) mLlMain.getContext())
-                                .setIntent(SubMenuActivity.class)
-                                .putExtra(Constants.POJO, menuModel)
-//                        .putExtra(Constants.MENU_TITLE, (position-1 + 1) + ". " + arrayListData.get(position-1).getTitle().toString().trim())
-                                .startActivity();
-                    } else {
-//                        Toast.makeText(context, "Coming soon", Toast.LENGTH_SHORT).show();
-                        if (arrayListData.get(position-1).getWeb_view_url() != null) {
-                            if (arrayListData.get(position-1).getWeb_view_url().equals("")) {
-                            } else {
-                                mLlMain.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        context.startActivity(new Intent(context, WebViewActivity.class).putExtra(Constants.POJO, arrayListData.get(position-1)));
-                                    }
-                                });
+                    try {
+                        if ((view.getContext() instanceof MenuActivity)) {
+                            MenuModel menuModel = arrayListData.get(position - 1);
+                            menuModel.setTitle((position - 1 + 1) + ". " + arrayListData.get(position - 1).getTitle().toString().trim());
+                            menuModel.setPosition(position - 1 + 1);
+                            ((BaseActivity) mLlMain.getContext())
+                                    .setIntent(SubMenuActivity.class)
+                                    .putExtra(Constants.POJO, menuModel)
+                                    .startActivity();
+                        } else {
+                            if (arrayListData.get(position - 1).getWeb_view_url() != null) {
+                                if (arrayListData.get(position - 1).getWeb_view_url().equals("")) {
+                                } else {
+                                    context.startActivity(new Intent(context, WebViewActivity.class).putExtra(Constants.POJO, arrayListData.get(position - 1)));
+                                }
                             }
                         }
-                    }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -195,19 +156,14 @@ public class SubMenuAdapter extends BaseAdapter {
             TextView mTvMenuItemDescription = (TextView) itemViewHeader.findViewById(R.id.tv_menu_item_description);
             final ProgressBar mHomeProgress = (ProgressBar) itemViewHeader.findViewById(R.id.homeprogress);
 
-
             mTvMenuItemTitle.setText(mMenuModel.getTitle());
-            if (mMenuModel.getDescription().toString().trim().equals(""))
-            {
+            if (mMenuModel.getDescription().toString().trim().equals("")) {
                 mTvMenuItemDescription.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 mTvMenuItemDescription.setText(mMenuModel.getDescription().toString().trim());
             }
             Glide.with(mIvMenuImage.getContext())
-                    .load("http://www.jrmfoods.co.in/" + mMenuModel.getImage())
-//                .placeholder(R.drawable.loading_spinner)
-//                .into(mIvMenuImage);
+                    .load(Config.getBaseUrlImage() + mMenuModel.getImage())
                     .listener(new RequestListener<Drawable>() {
 
 
